@@ -8,8 +8,8 @@ permissions:
   contents: read
 jobs:
   unsigned-build:
-    runs-on: macos-26
-    timeout-minutes: 30
+    runs-on: xcode-27
+    timeout-minutes: 45
     steps:
       - name: Checkout Vietnamese localization project
         uses: actions/checkout@v4
