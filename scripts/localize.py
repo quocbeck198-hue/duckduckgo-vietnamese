@@ -13,6 +13,8 @@ import sys
 
 STRINGS_RE = re.compile(r'^\s*"((?:\\.|[^"\\])*)"\s*=\s*"((?:\\.|[^"\\])*)"\s*;\s*$', re.M)
 FORMAT_RE = re.compile(r'%(?!%)(?:[1-9]\d*\$)?[-+ #0]*(?:\d+|\*)?(?:\.\d+)?(?:ll|hh|[hlzjt])?[@diuoxXfFeEgGcCsSpPaADUOX]')
+MARKDOWN_LINK_RE = re.compile(r'\\]\\(([^)\\n]+)\\)')
+NAMED_TOKEN_RE = re.compile(r'\\{[A-Za-z][A-Za-z0-9_.-]*\\}')
 SOURCE_FILES = [
   'iOS/DuckDuckGo/UserInterfaceResources/en.lproj/Localizable.strings',
   'iOS/DuckDuckGo/en.lproj/InfoPlist.strings',
@@ -57,6 +59,10 @@ def validate(source: str, translated: str, key: str) -> None:
         raise ValueError(f'{key}: Bản dịch rỗng hoặc không phải chuỗi')
     if formats(source) != formats(translated):
         raise ValueError(f'{key}: Sai biến định dạng: {formats(source)} != {formats(translated)}')
+    if Counter(MARKDOWN_LINK_RE.findall(source)) != Counter(MARKDOWN_LINK_RE.findall(translated)):
+        raise ValueError(f'{key}: Bản dịch làm thay đổi đích liên kết Markdown')
+    if Counter(NAMED_TOKEN_RE.findall(source)) != Counter(NAMED_TOKEN_RE.findall(translated)):
+        raise ValueError(f'{key}: Bản dịch làm thay đổi biến dạng {{name}}')
 
 
 def generate(source_root: Path, out_root: Path, translations: Path, strict: bool=True) -> dict:
