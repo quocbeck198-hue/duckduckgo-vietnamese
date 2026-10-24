@@ -6,6 +6,7 @@ import sys
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 from localize import SOURCE_FILES, parse_strings, escape, formats, validate, generate
 from patch_project import patch, remove_private_duck_sans
+from patch_spm_lock import remove_private_ducksans_pin
 
 class LocalizeTests(unittest.TestCase):
     def test_escapes(self):
@@ -64,5 +65,18 @@ class LocalizeTests(unittest.TestCase):
         self.assertEqual(n,1)
         self.assertEqual(n2,0)
         self.assertEqual(once,twice)
+
+    def test_swiftpm_lock_pin_cleanup(self):
+        with tempfile.TemporaryDirectory() as d:
+            path = Path(d) / 'Package.resolved'
+            data = {'version': 3, 'pins': [
+                {'identity': 'native-apps-ducksans', 'state': {'version': '1.0.0'}},
+                {'identity': 'good-public-package', 'state': {'version': '2.0.0'}},
+            ]}
+            path.write_text(json.dumps(data))
+            self.assertEqual(remove_private_ducksans_pin(path), 1)
+            self.assertEqual(remove_private_ducksans_pin(path), 0)
+            remaining = json.loads(path.read_text())
+            self.assertEqual([v['identity'] for v in remaining['pins']], ['good-public-package'])
 
 if __name__=='__main__':unittest.main()
