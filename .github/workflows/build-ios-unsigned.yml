@@ -24,7 +24,9 @@ jobs:
       - name: Unit tests
         run: python3 -m unittest discover -s tests -v
       - name: Render Vietnamese resources
-        run: python3 scripts/localize.py --source upstream --output overlay
+        run: |
+          python3 scripts/localize.py --source upstream --output overlay
+          python3 scripts/localize_plurals.py --source upstream --output overlay
       - name: Apply vi.lproj overlay
         shell: bash
         run: |
