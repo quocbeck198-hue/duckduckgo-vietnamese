@@ -13,8 +13,8 @@ import sys
 
 STRINGS_RE = re.compile(r'^\s*"((?:\\.|[^"\\])*)"\s*=\s*"((?:\\.|[^"\\])*)"\s*;\s*$', re.M)
 FORMAT_RE = re.compile(r'%(?!%)(?:[1-9]\d*\$)?[-+ #0]*(?:\d+|\*)?(?:\.\d+)?(?:ll|hh|[hlzjt])?[@diuoxXfFeEgGcCsSpPaADUOX]')
-MARKDOWN_LINK_RE = re.compile(r'\\]\\(([^)\\n]+)\\)')
-NAMED_TOKEN_RE = re.compile(r'\\{[A-Za-z][A-Za-z0-9_.-]*\\}')
+MARKDOWN_LINK_RE = re.compile(r'\]\(([^)\n]+)\)')
+NAMED_TOKEN_RE = re.compile(r'\{[A-Za-z][A-Za-z0-9_.-]*\}')
 SOURCE_FILES = [
   'iOS/DuckDuckGo/UserInterfaceResources/en.lproj/Localizable.strings',
   'iOS/DuckDuckGo/en.lproj/InfoPlist.strings',
