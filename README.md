@@ -6,7 +6,7 @@ Dự án độc lập (không phải phiên bản chính thức của DuckDuckGo
 
 ## Đã có
 
-- **632 bản dịch tiếng Việt đã được bổ sung** gồm giao diện chính, quyền truy cập ứng dụng và một phần Đồng bộ & Sao lưu.
+- **958 bản dịch tiếng Việt đã được bổ sung** gồm giao diện chính, quyền truy cập ứng dụng và một phần Đồng bộ & Sao lưu.
 - Công cụ tạo `.lproj/Localizable.strings`, `.lproj/InfoPlist.strings` từ tệp nguồn tiếng Anh chính thức.
 - Các chuỗi chưa dịch giữ tiếng Anh, không tuyên bố đạt 100%. Phần trăm bao phủ thực tế xuất ở `coverage.json` khi tải được nguồn.
 - Trình kiểm tra khóa, trùng khóa, biến định dạng `%@`, `%d`, `%%` và chuỗi rỗng.
@@ -61,7 +61,7 @@ upstream.json                              # commit gốc
 
 ## Cách tiếp tục để đạt bản hoàn thiện
 
-1. CI ban đầu đã PASS với 6 nguồn thật (2.153 chuỗi, 632 mục Việt hóa = 29,35%); tiếp tục kiểm tra các bản cập nhật.
+1. CI ban đầu đã PASS với 6 nguồn thật (2.153 chuỗi, 958 mục Việt hóa = 44,50%); tiếp tục kiểm tra các bản cập nhật.
 2. Dịch tiếp mọi chuỗi tiếng Anh bằng cách sửa `translations/vi.json` (đúng từng key, kiểm tra placeholders).
 3. Bổ sung những `.stringsdict`, package hay web resources còn thiếu sau khi đối chiếu toàn bộ mã nguồn. Tránh cho rằng `6` tệp này bao phủ toàn bộ ứng dụng.
 4. Build thật, thử các màn hình trên iPhone, sửa lỗi tràn chữ/vấn đề dịch và ký ứng dụng riêng nếu cần.
