@@ -20,7 +20,9 @@ jobs:
       - name: Download pinned upstream localization strings
         run: python scripts/fetch_upstream.py --source upstream
       - name: Generate and validate Vietnamese resources
-        run: python scripts/localize.py --source upstream --output output
+        run: |
+          python scripts/localize.py --source upstream --output output
+          python scripts/localize_plurals.py --source upstream --output output
       - name: Upload localization overlay and coverage
         uses: actions/upload-artifact@v4
         with:
