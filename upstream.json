@@ -1,0 +1,7 @@
+{
+  "repository": "duckduckgo/apple-browsers",
+  "branch": "main",
+  "commit": "54be22874ad58d907e88a8a7b0d2065ae19e99d4",
+  "pinned_at": "2026-10-24",
+  "notes": "Version pinned to avoid silent source-key drift. Update only after validation."
+}

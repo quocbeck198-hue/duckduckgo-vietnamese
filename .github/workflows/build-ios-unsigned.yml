@@ -1,0 +1,74 @@
+name: Experimental iOS unsigned build (manual)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  unsigned-build:
+    runs-on: macos-26
+    timeout-minutes: 90
+    steps:
+      - name: Checkout Vietnamese localization project
+        uses: actions/checkout@v4
+      - name: Checkout pinned upstream with submodules
+        uses: actions/checkout@v4
+        with:
+          repository: duckduckgo/apple-browsers
+          ref: 54be22874ad58d907e88a8a7b0d2065ae19e99d4
+          path: upstream
+          submodules: recursive
+          persist-credentials: false
+      - name: Unit tests
+        run: python3 -m unittest discover -s tests -v
+      - name: Render Vietnamese resources
+        run: python3 scripts/localize.py --source upstream --output overlay
+      - name: Apply vi.lproj overlay
+        shell: bash
+        run: |
+          set -euo pipefail
+          rsync -av overlay/iOS/ upstream/iOS/
+          python3 scripts/patch_project.py upstream/iOS/DuckDuckGo-iOS.xcodeproj/project.pbxproj --remove-private-font
+      - name: Configure external unsigned build
+        shell: bash
+        run: |
+          cat > upstream/iOS/Configuration/ExternalDeveloper.xcconfig <<'CFG'
+          DEVELOPMENT_TEAM =
+          APP_ID = org.community.duckduckgo.vietnamese
+          GROUP_ID_PREFIX = group.org.community.duckduckgo.vietnamese
+          SUBSCRIPTION_APP_GROUP = org.community.duckduckgo.vietnamese.subscriptions
+          CODE_SIGN_STYLE = Automatic
+          PROVISIONING_PROFILE_SPECIFIER =
+          CFG
+          xcodebuild -version
+      - name: Attempt unsigned device build
+        shell: bash
+        run: |
+          set -o pipefail
+          cd upstream/iOS
+          SKIP_STRINGS=1 xcodebuild \
+            -project DuckDuckGo-iOS.xcodeproj \
+            -scheme 'iOS Browser' \
+            -configuration Debug \
+            -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath "$RUNNER_TEMP/ddg-build" \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGN_IDENTITY='' \
+            build | tee "$RUNNER_TEMP/build.log"
+      - name: Package unsigned .app (not installable without signing)
+        shell: bash
+        run: |
+          set -euo pipefail
+          find "$RUNNER_TEMP/ddg-build/Build/Products" -name '*.app' -maxdepth 4 -type d -print
+          mkdir -p output/Payload
+          APP=$(find "$RUNNER_TEMP/ddg-build/Build/Products/Debug-iphoneos" -maxdepth 1 -type d -name '*.app' | head -1)
+          test -n "$APP"
+          cp -R "$APP" output/Payload/
+          cd output && zip -qry ../duckduckgo-vi-UNSIGNED.ipa Payload
+      - name: Upload unsigned build candidate
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duckduckgo-vi-unsigned-build
+          path: duckduckgo-vi-UNSIGNED.ipa
+          retention-days: 7

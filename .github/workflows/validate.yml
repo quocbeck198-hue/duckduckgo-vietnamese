@@ -1,0 +1,29 @@
+name: Validate Vietnamese localization
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  localization:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Download pinned upstream localization strings
+        run: python scripts/fetch_upstream.py --source upstream
+      - name: Generate and validate Vietnamese resources
+        run: python scripts/localize.py --source upstream --output output
+      - name: Upload localization overlay and coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: duckduckgo-vi-lproj
+          path: output/
+          retention-days: 14
