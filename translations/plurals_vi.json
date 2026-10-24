@@ -1,0 +1,278 @@
+{
+  "locale": "vi",
+  "source": "iOS/DuckDuckGo/UserInterfaceResources/en.lproj/Localizable.stringsdict",
+  "entries": {
+    "aiChat.history.download.complete.message": {
+      "chats": {
+        "one": "Đã tải xuống %d cuộc trò chuyện",
+        "other": "Đã tải xuống %d cuộc trò chuyện"
+      }
+    },
+    "aiChat.history.deleteAll.confirmation.title": {
+      "chats": {
+        "one": "Xóa %d cuộc trò chuyện?",
+        "other": "Xóa %d cuộc trò chuyện?"
+      }
+    },
+    "scoped.fire.confirmation.tabs.deleted.toast": {
+      "tabs": {
+        "one": "Đã xóa %d tab và dữ liệu của tab",
+        "other": "Đã xóa %d tab và dữ liệu của chúng"
+      }
+    },
+    "fire.confirmation.data.subtitle.withCount": {
+      "items": {
+        "one": "Xóa dữ liệu từ 1 trang web. Bạn có thể bị đăng xuất khỏi tài khoản.",
+        "other": "Xóa dữ liệu từ %d trang web. Bạn có thể bị đăng xuất khỏi tài khoản.",
+        "zero": "Không có"
+      }
+    },
+    "fire.confirmation.tabs.subtitle.withCount": {
+      "items": {
+        "one": "Đóng %d tab",
+        "other": "Đóng tất cả %d tab",
+        "zero": "Không có"
+      }
+    },
+    "bookmark.deleteFolderAlert.message": {
+      "items": {
+        "one": "Bạn có chắc muốn xóa thư mục này và %d mục?",
+        "other": "Bạn có chắc muốn xóa thư mục này và %d mục?"
+      }
+    },
+    "dax.onboarding.browsing.multiple.trackers": {
+      "count": {
+        "one": "*%2$@, %3$@* và *1 trình theo dõi khác* đang cố theo dõi bạn tại đây.\n\nTôi đã chặn chúng!\n\n☝️ Bạn có thể kiểm tra thanh địa chỉ để biết ai đang cố theo dõi mình khi truy cập trang mới.",
+        "zero": "*%2$@ và %3$@* đang cố theo dõi bạn tại đây.\n\nTôi đã chặn chúng!\n\n☝️ Bạn có thể kiểm tra thanh địa chỉ để biết ai đang cố theo dõi mình khi truy cập trang mới.",
+        "other": "*%2$@, %3$@* và *%d trình theo dõi khác* đang cố theo dõi bạn tại đây.\n\nTôi đã chặn chúng!\n\n☝️ Bạn có thể kiểm tra thanh địa chỉ để biết ai đang cố theo dõi mình khi truy cập trang mới."
+      }
+    },
+    "contextual.onboarding.browsing.multiple.trackers": {
+      "count": {
+        "one": "*%2$@, %3$@* và *1 trình theo dõi khác* đang cố theo dõi bạn. Tôi đã chặn chúng!\n\n☝️ Chạm vào chiếc khiên để biết thêm.",
+        "zero": "*%2$@ và %3$@* đang cố theo dõi bạn. Tôi đã chặn chúng!\n\n☝️ Chạm vào chiếc khiên để biết thêm.",
+        "other": "*%2$@, %3$@* và *%d trình theo dõi khác* đang cố theo dõi bạn. Tôi đã chặn chúng!\n\n☝️ Chạm vào chiếc khiên để biết thêm."
+      }
+    },
+    "privacy.protection.major.trackers.found": {
+      "networks": {
+        "one": "Phát hiện %d trình theo dõi lớn",
+        "other": "Phát hiện %d trình theo dõi lớn"
+      }
+    },
+    "privacy.protection.major.trackers.blocked": {
+      "networks": {
+        "one": "Đã chặn %d trình theo dõi lớn",
+        "other": "Đã chặn %d trình theo dõi lớn"
+      }
+    },
+    "privacy.protection.trackers.found": {
+      "networks": {
+        "one": "Phát hiện %d trình theo dõi",
+        "other": "Phát hiện %d trình theo dõi"
+      }
+    },
+    "privacy.protection.trackers.blocked": {
+      "networks": {
+        "one": "Đã chặn tải %d trình theo dõi",
+        "other": "Đã chặn tải %d trình theo dõi"
+      }
+    },
+    "omnibar.notification.trackers-blocked": {
+      "trackers": {
+        "one": "Đã chặn %d trình theo dõi",
+        "other": "Đã chặn %d trình theo dõi"
+      }
+    },
+    "privacy.protection.other.domains.loaded": {
+      "networks": {
+        "one": "Đã tải %d tên miền khác",
+        "other": "Đã tải %d tên miền khác"
+      }
+    },
+    "privacy.protection.first.party.trackers.loaded": {
+      "networks": {
+        "one": "Đã tải %d trình theo dõi thuộc trang web này",
+        "other": "Đã tải %d trình theo dõi thuộc trang web này"
+      }
+    },
+    "number.of.tabs": {
+      "tabs": {
+        "one": "%d tab riêng tư",
+        "zero": "Không có tab riêng tư",
+        "other": "%d tab riêng tư"
+      }
+    },
+    "autofill.number.of.passwords": {
+      "passwords": {
+        "other": "%d mật khẩu",
+        "one": "%d mật khẩu"
+      }
+    },
+    "autofill.delete.all.passwords.confirmation.title": {
+      "passwords": {
+        "other": "Bạn có chắc muốn xóa %d mật khẩu?",
+        "one": "Bạn có chắc muốn xóa mật khẩu này?"
+      }
+    },
+    "autofill.delete.all.passwords.confirmation.body": {
+      "passwords": {
+        "other": "Các mật khẩu sẽ bị xóa khỏi thiết bị này. Hãy chắc chắn bạn vẫn có cách truy cập %2$#@accounts@ của mình.",
+        "one": "Mật khẩu sẽ bị xóa khỏi thiết bị này. Hãy chắc chắn bạn vẫn có cách truy cập %2$#@accounts@ của mình."
+      },
+      "accounts": {
+        "other": "các tài khoản",
+        "one": "tài khoản"
+      }
+    },
+    "autofill.delete.all.passwords.sync.confirmation.body": {
+      "passwords": {
+        "other": "Các mật khẩu sẽ bị xóa khỏi tất cả thiết bị đã đồng bộ. Hãy chắc chắn bạn vẫn có cách truy cập %2$#@accounts@ của mình.",
+        "one": "Mật khẩu sẽ bị xóa khỏi tất cả thiết bị đã đồng bộ. Hãy chắc chắn bạn vẫn có cách truy cập %2$#@accounts@ của mình."
+      },
+      "accounts": {
+        "other": "các tài khoản",
+        "one": "tài khoản"
+      }
+    },
+    "autofill.delete.all.passwords.completion": {
+      "passwords": {
+        "other": "Đã xóa %d mật khẩu",
+        "one": "Đã xóa %d mật khẩu"
+      }
+    },
+    "tab.close": {
+      "tabs": {
+        "other": "Đóng các tab",
+        "one": "Đóng tab"
+      }
+    },
+    "tab.switcher.close-tabs.button.withCount": {
+      "tabs": {
+        "other": "Đóng %d tab",
+        "one": "Đóng %d tab",
+        "zero": "Đóng tab"
+      }
+    },
+    "closeAllTabs.withCount": {
+      "tabs": {
+        "other": "Đóng tất cả %d tab",
+        "one": "Đóng tab",
+        "zero": "Đóng tất cả tab"
+      }
+    },
+    "alertTitleCloseSelectedTabs.withCount": {
+      "tabs": {
+        "other": "Đóng %d tab?",
+        "one": "Đóng tab?"
+      }
+    },
+    "alertTitleCloseOtherTabs.withCount": {
+      "tabs": {
+        "other": "Đóng %d tab khác?",
+        "one": "Đóng tab khác?"
+      }
+    },
+    "alertMessageCloseOtherTabs.withCount": {
+      "tabs": {
+        "other": "Bạn có chắc muốn đóng các tab này?",
+        "one": "Bạn có chắc muốn đóng tab này?"
+      }
+    },
+    "alertTitleCloseTabs.withCount": {
+      "tabs": {
+        "other": "Đóng %d tab?",
+        "one": "Đóng tab?"
+      }
+    },
+    "alertMessageCloseTabs.withCount": {
+      "tabs": {
+        "other": "Bạn có chắc muốn đóng các tab này?",
+        "one": "Bạn có chắc muốn đóng tab này?"
+      }
+    },
+    "alertTitleCloseAllTabs.withCount": {
+      "tabs": {
+        "other": "Đóng tất cả %d tab?",
+        "one": "Đóng tab?"
+      }
+    },
+    "alertMessageCloseAllTabs.withCount": {
+      "tabs": {
+        "other": "Bạn có chắc muốn đóng tất cả các tab?",
+        "one": "Bạn có chắc muốn đóng tab này?"
+      }
+    },
+    "tab.switcher.select-tabs.withCount": {
+      "tabs": {
+        "other": "Chọn các tab",
+        "one": "Chọn tab"
+      }
+    },
+    "tab.switcher.close-others.withCount": {
+      "tabs": {
+        "other": "Đóng các tab khác",
+        "one": "Đóng tab khác"
+      }
+    },
+    "shareLinks.withCount": {
+      "tabs": {
+        "other": "Chia sẻ %d liên kết",
+        "one": "Chia sẻ liên kết"
+      }
+    },
+    "shareSelectedTabs.withCount": {
+      "tabs": {
+        "other": "Chia sẻ các tab đã chọn",
+        "one": "Chia sẻ tab đã chọn"
+      }
+    },
+    "bookmark.selected.tabs.with.count": {
+      "tabs": {
+        "other": "Đánh dấu %d tab",
+        "one": "Đánh dấu tab"
+      }
+    },
+    "tabsBookmarked.withCount": {
+      "tabs": {
+        "other": "Đã thêm %d dấu trang",
+        "one": "Đã thêm dấu trang"
+      }
+    },
+    "alertTitleBookmarkSelectedTabs.withCount": {
+      "tabs": {
+        "other": "Đánh dấu %d tab?",
+        "one": "Đánh dấu tab đã chọn?"
+      }
+    },
+    "alertTitleBookmarkAll.withCount": {
+      "tabs": {
+        "other": "Đánh dấu %d tab?",
+        "one": "Đánh dấu tab đã chọn?"
+      }
+    },
+    "numberOfSelectedTabs.withCount": {
+      "tabs": {
+        "other": "Đã chọn %d"
+      }
+    },
+    "numberOfSelectedTabsForMenuTitle.withCount": {
+      "tabs": {
+        "other": "Đã chọn %d tab"
+      }
+    },
+    "settings.fireproofed.sites.subtitle": {
+      "items": {
+        "zero": "%d trang web được giữ lại dữ liệu",
+        "one": "%d trang web được giữ lại dữ liệu",
+        "other": "%d trang web được giữ lại dữ liệu"
+      }
+    },
+    "tab.switcher.tracker.count.title": {
+      "trackers": {
+        "one": "Đã chặn %2$@ trình theo dõi",
+        "other": "Đã chặn %2$@ trình theo dõi"
+      }
+    }
+  }
+}
