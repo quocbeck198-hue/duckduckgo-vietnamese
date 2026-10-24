@@ -1827,7 +1827,10 @@
       "windows-waitlist.title": "Ứng dụng DuckDuckGo cho Windows",
       "windows-waitlist.waitlist-download-screen.try-duckduckgo-for-windows": "Tải DuckDuckGo cho Windows!",
       "zip.content.import.type.button.title.continue": "Tiếp tục",
-      "zip.content.import.types.title": "Bạn muốn nhập dữ liệu nào?"
+      "zip.content.import.types.title": "Bạn muốn nhập dữ liệu nào?",
+      "settings.about.subscription.sentence.rebranding.ai": "Ngoài ra, chúng tôi còn cung cấp [gói đăng ký DuckDuckGo](ddgQuickLink://duckduckgo.com/duckduckgo-help-pages/privacy-pro/) tích hợp trong trình duyệt. Người đăng ký được tăng cường quyền riêng tư với [VPN](ddgQuickLink://duckduckgo.com/duckduckgo-help-pages/privacy-pro/vpn/) nhanh, dễ dùng để bảo vệ hoạt động trực tuyến; truy cập các mô hình AI nâng cao trong dịch vụ trò chuyện AI riêng tư Duck.ai; dịch vụ tìm và xóa thông tin cá nhân khỏi các trang tra cứu người dùng; cùng dịch vụ hỗ trợ khôi phục danh tính nếu bị đánh cắp.",
+      "settings.about.text.template": "DuckDuckGo là công ty độc lập chuyên bảo vệ người dùng trực tuyến, dành cho bất kỳ ai muốn lấy lại quyền kiểm soát thông tin cá nhân.\n\nChúng tôi tin cách tốt nhất để bảo vệ thông tin cá nhân trước tin tặc, kẻ lừa đảo và các công ty xâm phạm quyền riêng tư là ngăn việc thu thập dữ liệu ngay từ đầu. Đó là lý do hàng triệu người [chọn DuckDuckGo thay vì Chrome và các trình duyệt khác](ddgQuickLink://duckduckgo.com/compare-privacy) để tìm kiếm và duyệt web. Công cụ tìm kiếm tích hợp của chúng tôi hoạt động giống Google nhưng không theo dõi lượt tìm kiếm của bạn. Các biện pháp bảo vệ khi duyệt web, như chặn trình theo dõi quảng cáo và chặn cookie, giúp ngăn công ty khác thu thập dữ liệu. Và trình duyệt hoàn toàn miễn phí — chúng tôi kiếm tiền từ [quảng cáo tìm kiếm tôn trọng quyền riêng tư](ddgQuickLink://duckduckgo.com/duckduckgo-help-pages/company/how-duckduckgo-makes-money/), chứ không khai thác dữ liệu của bạn.\n\n%@\n\nHãy lấy lại quyền kiểm soát thông tin cá nhân với trình duyệt được thiết kế để bảo vệ, không phải thu thập dữ liệu.",
+      "prompt.custom.url.scheme.open": "Mở"
     },
     "iOS/DuckDuckGo/en.lproj/InfoPlist.strings": {
       "CFBundleDisplayName": "DuckDuckGo",
