@@ -88,4 +88,9 @@ class LocalizeTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             validate('Attach {attachment}', 'Đính kèm {file}', 'bad-token')
 
+    def test_percent_discount_is_not_a_format_variable(self):
+        self.assertEqual(formats('Get 25% off.'), {})
+        self.assertEqual(formats('Save %d%% today'), {'%d': 1})
+        validate('Get 25% off.', 'Giảm giá 25%.', 'discount')
+
 if __name__=='__main__':unittest.main()
