@@ -79,4 +79,13 @@ class LocalizeTests(unittest.TestCase):
             remaining = json.loads(path.read_text())
             self.assertEqual([v['identity'] for v in remaining['pins']], ['good-public-package'])
 
+    def test_markup_placeholders_preserved(self):
+        validate('See [help](https://example.test/help) and {attachment}',
+                 'Xem [trợ giúp](https://example.test/help) và {attachment}', 'help')
+        with self.assertRaises(ValueError):
+            validate('See [help](https://example.test/help)',
+                     'Xem [trợ giúp](https://example.test/wrong)', 'bad-link')
+        with self.assertRaises(ValueError):
+            validate('Attach {attachment}', 'Đính kèm {file}', 'bad-token')
+
 if __name__=='__main__':unittest.main()
