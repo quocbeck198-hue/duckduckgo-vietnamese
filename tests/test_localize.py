@@ -7,6 +7,7 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 from localize import SOURCE_FILES, parse_strings, escape, formats, validate, generate
 from patch_project import patch, remove_private_duck_sans
 from patch_spm_lock import remove_private_ducksans_pin
+from patch_unsigned_grdb import patch as patch_unsigned_grdb
 
 class LocalizeTests(unittest.TestCase):
     def test_escapes(self):
@@ -92,5 +93,17 @@ class LocalizeTests(unittest.TestCase):
         self.assertEqual(formats('Get 25% off.'), {})
         self.assertEqual(formats('Save %d%% today'), {'%d': 1})
         validate('Get 25% off.', 'Giảm giá 25%.', 'discount')
+
+    def test_unsigned_grdb_signing_guard(self):
+        chunk = '/* Copy GRDB framework */ = {\\n'
+        chunk += '  shellScript = "copy\\\\n/usr/bin/codesign --force --sign identity\\\\n";'
+        chunk += '\\n\\t\\t};'
+        fixed, changes = patch_unsigned_grdb(chunk)
+        self.assertEqual(changes, 1)
+        self.assertIn('Skipping GRDB framework signing in unsigned build', fixed)
+        self.assertIn('/usr/bin/codesign', fixed)
+        self.assertIn('\\\\nfi\\\\n', fixed)
+        self.assertEqual(patch_unsigned_grdb(fixed), (fixed, 0))
+
 
 if __name__=='__main__':unittest.main()
