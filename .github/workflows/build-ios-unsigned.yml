@@ -32,6 +32,7 @@ jobs:
           rsync -av overlay/iOS/ upstream/iOS/
           python3 scripts/patch_project.py upstream/iOS/DuckDuckGo-iOS.xcodeproj/project.pbxproj --remove-private-font
           python3 scripts/patch_spm_lock.py upstream/iOS/DuckDuckGo-iOS.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
+          python3 scripts/patch_unsigned_grdb.py upstream/iOS/DuckDuckGo-iOS.xcodeproj/project.pbxproj
       - name: Configure external unsigned build
         shell: bash
         run: |
