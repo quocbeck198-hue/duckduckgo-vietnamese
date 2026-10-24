@@ -7,10 +7,10 @@ Dự án độc lập (không phải phiên bản chính thức của DuckDuckGo
 ## Đã có
 
 - **2.088 chuỗi tiếng Việt đã được biên soạn trong sáu nguồn chính** gồm giao diện chính, quyền truy cập ứng dụng và một phần Đồng bộ & Sao lưu.
-- Công cụ tạo `.lproj/Localizable.strings`, `.lproj/InfoPlist.strings` từ tệp nguồn tiếng Anh chính thức.
+- Công cụ tạo `.lproj/Localizable.strings`, `.lproj/InfoPlist.strings` từ nguồn tiếng Anh; đồng thời tạo **43/43 mục `.stringsdict` có dạng số ít/số nhiều** (96 nhánh bản dịch), giữ nguyên cấu trúc biến và các mẫu định dạng.
 - Các chuỗi chưa dịch giữ tiếng Anh, không tuyên bố đạt 100%. Phần lớn 65 khóa còn lại là tên sản phẩm không nên dịch (Duck.ai, VPN, iPhone), nút OK, ví dụ dữ liệu hoặc chuỗi nguồn chỉ chứa tên khóa; chúng vẫn cần rà soát khi chạy thực tế. Phần trăm bao phủ thực tế xuất ở `coverage.json` khi tải được nguồn.
 - Trình kiểm tra khóa, trùng khóa, biến định dạng `%@`, `%d`, `%%` và chuỗi rỗng.
-- CI chạy kiểm thử, tải **6 tệp nguồn cụ thể** từ commit cố định để tránh thay đổi không báo trước; xuất gói dịch từ GitHub Actions.
+- CI chạy kiểm thử, tải **7 tệp nguồn cụ thể** từ commit cố định để tránh thay đổi không báo trước; xuất gói dịch từ GitHub Actions.
 - Workflow **thử build không ký** chạy trên Xcode 27; chỉ kích hoạt thủ công hoặc khi sửa chính workflow. Các thử nghiệm thực tế đã giúp sửa phụ thuộc font Duck Sans riêng tư và script ký GRDB.framework. Chưa xác nhận build thành công.
 
 ## Mã nguồn gốc
@@ -34,6 +34,7 @@ Dự án đang được quản lý tại [quocbeck198-hue/duckduckgo-vietnamese]
 python3 -m unittest discover -s tests -v
 python3 scripts/fetch_upstream.py --source upstream
 python3 scripts/localize.py --source upstream --output output
+python3 scripts/localize_plurals.py --source upstream --output output
 ```
 
 > Chỉ tạo tệp ở `output/`, không sửa repository gốc.
@@ -53,8 +54,10 @@ python3 scripts/localize.py --source upstream --output output
 .github/workflows/validate.yml            # unit tests, xuất vi.lproj + coverage
 .github/workflows/build-ios-unsigned.yml   # thử build Xcode, chỉ chạy thủ công
 translations/vi.json                       # 2088 chuỗi trong 6 mô-đun đã kiểm kê
-scripts/fetch_upstream.py                  # tải 6 tệp đã cố định SHA
+translations/plurals_vi.json               # 43 nhóm / 96 nhánh số lượng
+scripts/fetch_upstream.py                  # tải 7 tệp đã cố định SHA
 scripts/localize.py                        # sinh vi.lproj + kiểm tra format
+scripts/localize_plurals.py                # sinh Localizable.stringsdict, kiểm tra số nhiều
 scripts/patch_project.py                   # thêm vi vào Xcode knownRegions, bỏ font private
 scripts/patch_spm_lock.py                  # bỏ khóa gói font riêng tư
 scripts/patch_unsigned_grdb.py             # bỏ ký GRDB khi CODE_SIGNING_ALLOWED=NO
@@ -65,7 +68,7 @@ upstream.json                              # commit gốc
 
 1. CI ban đầu đã PASS với 6 nguồn thật (2.153 chuỗi, 2.088 mục Việt hóa ≈ 96,98%); tiếp tục kiểm tra các bản cập nhật.
 2. Dịch tiếp mọi chuỗi tiếng Anh bằng cách sửa `translations/vi.json` (đúng từng key, kiểm tra placeholders).
-3. Bổ sung những `.stringsdict`, package hay web resources còn thiếu sau khi đối chiếu toàn bộ mã nguồn. Tránh cho rằng `6` tệp này bao phủ toàn bộ ứng dụng.
+3. Đã bổ sung `.stringsdict` cho giao diện chính; rà tiếp các tài nguyên của package, web resources và màn hình khác trong toàn mã nguồn. Tránh cho rằng `6` tệp này bao phủ toàn bộ ứng dụng.
 4. Build thật, thử các màn hình trên iPhone, sửa lỗi tràn chữ/vấn đề dịch và ký ứng dụng riêng nếu cần.
 5. Có thể gửi Pull Request ngược upstream để xin hỗ trợ tiếng Việt chính thức.
 
@@ -84,5 +87,7 @@ Không liên kết hay tuyên bố được DuckDuckGo tài trợ hoặc chứng
 - GitHub Actions chạy kiểm thử Python tự động, phát hiện sai khác placeholder, liên kết Markdown và các biểu thức nhúng; xem [lịch sử CI](https://github.com/quocbeck198-hue/duckduckgo-vietnamese/actions/workflows/validate.yml).
 - Build thử không ký trên runner Xcode 27: [xem trạng thái](https://github.com/quocbeck198-hue/duckduckgo-vietnamese/actions/workflows/build-ios-unsigned.yml). Không tuyên bố có IPA cài được khi chưa thấy job PASS.
 - Các mẫu ví dụ lệnh Siri tiếng Anh được cố ý giữ nguyên để phù hợp cách kích hoạt khẩu lệnh. Tên thương hiệu/định dạng dữ liệu không dịch tùy tiện.
-- Cần kiểm tra .stringsdict, các gói SwiftPM dùng tài nguyên riêng, tài nguyên web và thiết kế giao diện trên thiết bị thực trước khi phát hành.
+- Đã kiểm thử .stringsdict cho giao diện chính; vẫn cần kiểm tra các gói SwiftPM dùng tài nguyên riêng, tài nguyên web và thiết kế giao diện trên thiết bị thực trước khi phát hành.
 - Cài trên iPhone không jailbreak vẫn yêu cầu ký mã Apple và cấu hình provisioning hợp lệ; tuyệt đối không gửi mật khẩu hoặc mã 2FA vào chat.
+
+- Kiểm thử nguồn số lượng: 43/43 nhóm và 96/96 nhánh đã được Việt hóa trong Localizable.stringsdict giao diện chính, trên cùng commit upstream cố định. Chưa kiểm tra tất cả biến thể trong ứng dụng chạy thật.
