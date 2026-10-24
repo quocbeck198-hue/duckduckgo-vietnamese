@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Download only 6 upstream English localization inputs; no Git clone needed."""
+"""Download pinned upstream English localization inputs; no Git clone needed."""
 from pathlib import Path
 import argparse
 import json
@@ -7,6 +7,7 @@ import sys
 from urllib.request import Request, urlopen
 from urllib.parse import quote
 from localize import SOURCE_FILES
+from localize_plurals import SOURCE_FILE as PLURAL_SOURCE
 
 BASE = 'https://raw.githubusercontent.com/duckduckgo/apple-browsers'
 
@@ -19,7 +20,7 @@ def main():
         a.sha=json.loads((Path(__file__).parents[1]/'upstream.json').read_text())['commit']
     if len(a.sha)!=40 or any(c not in '0123456789abcdef' for c in a.sha):
         sys.exit('SHA cần là 40 ký tự hex')
-    for rel in SOURCE_FILES:
+    for rel in [*SOURCE_FILES, PLURAL_SOURCE]:
         url=f'{BASE}/{a.sha}/{quote(rel, safe="/")}'
         dest=a.source/rel
         dest.parent.mkdir(parents=True,exist_ok=True)
