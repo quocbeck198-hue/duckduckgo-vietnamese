@@ -95,15 +95,14 @@ class LocalizeTests(unittest.TestCase):
         validate('Get 25% off.', 'Giảm giá 25%.', 'discount')
 
     def test_unsigned_grdb_signing_guard(self):
-        chunk = '/* Copy GRDB framework */ = {\\n'
-        chunk += '  shellScript = "copy\\\\n/usr/bin/codesign --force --sign identity\\\\n";'
-        chunk += '\\n\\t\\t};'
+        chunk = '/* Copy GRDB framework */ = {' + chr(10)
+        chunk += '  shellScript = "copy' + chr(92) + 'n/usr/bin/codesign --force --sign identity' + chr(92) + 'n";'
+        chunk += chr(10) + chr(9) + chr(9) + '};'
         fixed, changes = patch_unsigned_grdb(chunk)
         self.assertEqual(changes, 1)
         self.assertIn('Skipping GRDB framework signing in unsigned build', fixed)
         self.assertIn('/usr/bin/codesign', fixed)
-        self.assertIn('\\\\nfi\\\\n', fixed)
+        self.assertIn(chr(92) + 'nfi' + chr(92) + 'n', fixed)
         self.assertEqual(patch_unsigned_grdb(fixed), (fixed, 0))
-
 
 if __name__=='__main__':unittest.main()
