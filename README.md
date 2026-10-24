@@ -6,12 +6,12 @@ Dự án độc lập (không phải phiên bản chính thức của DuckDuckGo
 
 ## Đã có
 
-- **208 bản dịch được biên soạn** gồm giao diện chính, quyền truy cập ứng dụng và một phần Đồng bộ & Sao lưu.
+- **632 bản dịch tiếng Việt đã được bổ sung** gồm giao diện chính, quyền truy cập ứng dụng và một phần Đồng bộ & Sao lưu.
 - Công cụ tạo `.lproj/Localizable.strings`, `.lproj/InfoPlist.strings` từ tệp nguồn tiếng Anh chính thức.
 - Các chuỗi chưa dịch giữ tiếng Anh, không tuyên bố đạt 100%. Phần trăm bao phủ thực tế xuất ở `coverage.json` khi tải được nguồn.
 - Trình kiểm tra khóa, trùng khóa, biến định dạng `%@`, `%d`, `%%` và chuỗi rỗng.
 - CI chạy kiểm thử, tải **6 tệp nguồn cụ thể** từ commit cố định để tránh thay đổi không báo trước; xuất gói dịch từ GitHub Actions.
-- Workflow **thử build không ký (manual)** trên macOS Runner với Xcode. Quy trình thử nghiệm, có thể thất bại vì phụ thuộc dự án và chưa được chạy thực tế. Không tự chạy khi push.
+- Workflow **thử build không ký (chỉ chạy thủ công hoặc khi sửa chính workflow)** trên macOS Runner với Xcode. Quy trình thử nghiệm, có thể thất bại vì phụ thuộc dự án và chưa được chạy thực tế. Không tự chạy khi push.
 
 ## Mã nguồn gốc
 
@@ -22,7 +22,7 @@ Dự án độc lập (không phải phiên bản chính thức của DuckDuckGo
 
 ## Sử dụng đơn giản
 
-Sau khi đưa các tệp của dự án này lên **một repository GitHub mới, riêng biệt**:
+Dự án đang được quản lý tại [quocbeck198-hue/duckduckgo-vietnamese](https://github.com/quocbeck198-hue/duckduckgo-vietnamese). Để lấy tài nguyên dịch:
 
 1. Mở **Actions → Validate Vietnamese localization → Run workflow**.
 2. Khi job PASS, mở **Artifacts → duckduckgo-vi-lproj** để tải các thư mục bản dịch và `coverage.json`.
@@ -38,14 +38,14 @@ python3 scripts/localize.py --source upstream --output output
 
 > Chỉ tạo tệp ở `output/`, không sửa repository gốc.
 
-### Kiểm thử build iOS tự động bằng GitHub Actions (tùy chọn)
+### Kiểm thử build iOS bằng GitHub Actions (tùy chọn)
 
 1. Mở **Actions → Experimental iOS unsigned build (manual) → Run workflow**.
 2. Workflow sẽ checkout nguyên mã nguồn và submodule, thêm tệp `vi.lproj`, bỏ tham chiếu đến gói font Duck Sans độc quyền theo hướng dẫn chính thức, rồi thử biên dịch bằng Xcode.
 3. Nếu build PASS, sản phẩm là **IPA chưa được ký** (UNSIGNED): chưa cài được trên iPhone cho đến khi ký bằng chứng chỉ / provisioning profile hợp lệ.
 4. Nếu build FAIL, xem lỗi trong Actions, khắc phục phụ thuộc, resource membership và các vấn đề mới của dự án upstream; kết quả phụ thuộc Apple và môi trường build thực tế.
 
-**Lưu ý:** GitHub Actions có thể tính phút chạy theo gói và loại repository; workflow macOS chỉ chạy thủ công để không tiêu phí ngoài ý muốn. Không nhập Apple ID/mật khẩu/2FA vào biến môi trường hoặc workflow.
+**Lưu ý:** Standard macOS runner miễn phí đối với repository công khai theo tài liệu GitHub. Workflow macOS không tự chạy khi chỉ cập nhật bản dịch; nó chạy khi sửa tệp workflow hoặc khi bấm Run workflow. Không nhập Apple ID/mật khẩu/2FA vào biến môi trường hoặc workflow.
 
 ## Cấu trúc
 
@@ -61,7 +61,7 @@ upstream.json                              # commit gốc
 
 ## Cách tiếp tục để đạt bản hoàn thiện
 
-1. Đưa dự án vào repo mới, chạy CI đầu tiên; sửa lỗi xảy ra trên chuỗi thực và báo cáo coverage.
+1. CI ban đầu đã PASS với 6 nguồn thật (2.153 chuỗi, 632 mục Việt hóa = 29,35%); tiếp tục kiểm tra các bản cập nhật.
 2. Dịch tiếp mọi chuỗi tiếng Anh bằng cách sửa `translations/vi.json` (đúng từng key, kiểm tra placeholders).
 3. Bổ sung những `.stringsdict`, package hay web resources còn thiếu sau khi đối chiếu toàn bộ mã nguồn. Tránh cho rằng `6` tệp này bao phủ toàn bộ ứng dụng.
 4. Build thật, thử các màn hình trên iPhone, sửa lỗi tràn chữ/vấn đề dịch và ký ứng dụng riêng nếu cần.
@@ -72,6 +72,6 @@ upstream.json                              # commit gốc
 - Không jailbreak nhưng iOS vẫn yêu cầu **ký mã ứng dụng** mới có thể cài. Bản unsigned IPA không phải ứng dụng đã cài được.
 - Repo gốc có gói Swift font DuckSansFont riêng tư; không sao chép font độc quyền.
 - Việc dịch **không** làm cho trình duyệt bản App Store được tự động Việt hóa.
-- Hiện project không chứa bản build iOS đã kiểm chứng.
+- Bản dịch đã qua CI nhưng build iOS chưa được xác nhận PASS; ứng dụng iPhone cần ký mã hợp lệ.
 
 Không liên kết hay tuyên bố được DuckDuckGo tài trợ hoặc chứng nhận.
